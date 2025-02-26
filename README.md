@@ -1,4 +1,4 @@
-# Домашнее задание к занятию «Базы данных»
+# Домашнее задание к занятию «Базы данных» Бондарев Олег
 
 ### Инструкция по выполнению домашнего задания
 
@@ -29,14 +29,46 @@
 - какие данные хранятся в этих таблицах;
 - какой тип данных у столбцов в этих таблицах, если данные хранятся в PostgreSQL.
 
-Приведите решение к следующему виду:
-
 Сотрудники (
-
-- идентификатор, первичный ключ, serial,
-- фамилия varchar(50),
-- ...
-- идентификатор структурного подразделения, внешний ключ, integer).
+    employee_id SERIAL PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50),
+    middle_name VARCHAR(50),
+    position VARCHAR(100),
+    salary DECIMAL,
+    hire_date DATE,
+    department_id INTEGER REFERENCES Departments(department_id),
+    branch_id INTEGER REFERENCES Branches(branch_id)
+)
+Подразделения (
+    department_id SERIAL PRIMARY KEY,
+    department_name VARCHAR(100),
+    department_type VARCHAR(50)
+)
+Филиалы (
+    branch_id SERIAL PRIMARY KEY,
+    branch_address VARCHAR(255)
+)
+Проекты (
+    project_id SERIAL PRIMARY KEY,
+    project_name VARCHAR(255)
+)
+Назначения_на_проекты (
+    employee_id INTEGER REFERENCES,
+    project_id INTEGER REFERENCES,
+    PRIMARY KEY
+)
+Типы_подразделений (
+    department_type_id SERIAL PRIMARY KEY,
+    department_type_name VARCHAR(50)
+)
+История_зарплат (
+    salary_history_id SERIAL PRIMARY KEY,
+    employee_id INTEGER REFERENCES,
+    salary DECIMAL,
+    effective_date DATE
+)
+    
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.

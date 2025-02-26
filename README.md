@@ -59,9 +59,9 @@
 )
 
 -Назначения_на_проекты (
--    employee_id INTEGER REFERENCES,
--    project_id INTEGER REFERENCES,
--    PRIMARY KEY
+-    employee_id INTEGER REFERENCES Сотрудники(employee_id),
+-    project_id INTEGER REFERENCES Проекты(project_id),
+-    PRIMARY KEY (employee_id, project_id)
 -)
 
 -Типы_подразделений (
@@ -71,11 +71,15 @@
 
 -История_зарплат (
 -    salary_history_id SERIAL PRIMARY KEY,
--    employee_id INTEGER REFERENCES,
+-    employee_id INTEGER REFERENCES Сотрудники(employee_id),
 -    salary DECIMAL,
 -    effective_date DATE
 -)
-    
+
+-Должность (
+-    position_id serial PRIMARY KEY,
+-    position_name varchar(100)
+-)
 
 ## Дополнительные задания (со звёздочкой*)
 Эти задания дополнительные, то есть не обязательные к выполнению, и никак не повлияют на получение вами зачёта по этому домашнему заданию. Вы можете их выполнить, если хотите глубже шире разобраться в материале.
